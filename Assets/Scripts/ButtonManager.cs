@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonManager : MonoBehaviour
+public class ButtonManager : MonoSingleton<ButtonManager>
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public void SetTrue (string value)
     {
-        
+        CalculationManager.Instance.SetParamters(value, true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetFalse (string value)
     {
-        
+        CalculationManager.Instance.SetParamters(value, false);
     }
+
+
 }
