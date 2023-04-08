@@ -9,40 +9,96 @@ public class CalculationManager : MonoSingleton<CalculationManager>
     [SerializeField]
     private bool _isOnes, _isTens, _isHundreds, _isThousands;
 
-    public void SetParamters(string value, bool onOff)
+    public void SetParamters(string value)
     {
         switch (value)
         {
             case "Add":
-                _isAdd = onOff;
+                if(_isAdd == true)
+                {
+                    _isAdd = false;
+                }
+                else
+                {
+                    _isAdd = true;
+                }
                 break;
 
             case "Subtract":
-                _isSubtract = onOff;
+                if (_isSubtract == true)
+                {
+                    _isSubtract = false;
+                }
+                else
+                {
+                    _isSubtract = true;
+                }
                 break;
             
             case "Multiply":
-                _isAdd = onOff;
+                if (_isMultiply == true)
+                {
+                    _isMultiply = false;
+                }
+                else
+                {
+                    _isMultiply = true;
+                }
                 break;
             
             case "Divide":
-                _isDivide = onOff;
+                if (_isDivide == true)
+                {
+                    _isDivide = false;
+                }
+                else
+                {
+                    _isDivide = true;
+                }
                 break;
 
             case "Ones":
-                _isOnes = onOff;
+                if (_isOnes == true)
+                {
+                    _isOnes = false;
+                }
+                else
+                {
+                    _isOnes = true;
+                }
                 break;
 
             case "Tens":
-                _isTens = onOff;
+                if (_isTens == true)
+                {
+                    _isTens = false;
+                }
+                else
+                {
+                    _isTens = true;
+                }
                 break;
 
             case "Hundreds":
-                _isHundreds = onOff;
+                if (_isHundreds == true)
+                {
+                    _isHundreds = false;
+                }
+                else
+                {
+                    _isHundreds = true;
+                }
                 break;
 
             case "Thousands":
-                _isThousands = onOff;
+                if (_isThousands == true)
+                {
+                    _isThousands = false;
+                }
+                else
+                {
+                    _isThousands = true;
+                }
                 break;
         }
     }

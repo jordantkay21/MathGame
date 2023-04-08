@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class ButtonManager : MonoSingleton<ButtonManager>
 {
+    
 
-    public void SetTrue (string value)
+    public void SetTrueFalse(string value)
     {
-        CalculationManager.Instance.SetParamters(value, true);
+        CalculationManager.Instance.SetParamters(value);
     }
-
-    public void SetFalse (string value)
-    {
-        CalculationManager.Instance.SetParamters(value, false);
-    }
+  
 
 
 }
