@@ -445,6 +445,11 @@ MonoBehaviour:
   _isTens: 0
   _isHundreds: 0
   _isThousands: 0
+  _operatorsArray:
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &179268857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,7 +2907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &719721509
 Transform:
   m_ObjectHideFlags: 0

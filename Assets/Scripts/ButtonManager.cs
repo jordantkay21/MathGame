@@ -11,6 +11,11 @@ public class ButtonManager : MonoSingleton<ButtonManager>
         CalculationManager.Instance.SetParamters(value);
         DisplayManager.Instance.DisplayParamters(value);
     }
+
+    public void GenerateEquation()
+    {
+        CalculationManager.Instance.SetOperator();
+    }
   
 
 

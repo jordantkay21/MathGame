@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DisplayManager : MonoSingleton<DisplayManager>
 {
+    #region GameSetupVariables
     [SerializeField]
     private GameObject _addSelect, _subtractSelect, _multiplySelect, _divideSelect;
 
@@ -14,6 +15,7 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     private bool _isAdd, _isSubtract, _isMultiply, _isDivide;
     [SerializeField]
     private bool _isOnes, _isTens, _isHundreds, _isThousands;
+    #endregion
 
     public void DisplayParamters(string value)
     {
@@ -123,5 +125,10 @@ public class DisplayManager : MonoSingleton<DisplayManager>
                 }
                 break;
         }
+    }
+
+    public void GenerateEquation()
+    {
+
     }
 }
