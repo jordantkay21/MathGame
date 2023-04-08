@@ -9,6 +9,7 @@ public class ButtonManager : MonoSingleton<ButtonManager>
     public void SetTrueFalse(string value)
     {
         CalculationManager.Instance.SetParamters(value);
+        DisplayManager.Instance.DisplayParamters(value);
     }
   
 
