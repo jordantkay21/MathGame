@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class ButtonManager : MonoSingleton<ButtonManager>
 {
-    
+    [SerializeField]
+    private string selectedNumber;
 
     public void SetTrueFalse(string value)
     {
-        CalculationManager.Instance.SetParamters(value);
+        CalculationManager.Instance.SetParameters(value);
         DisplayManager.Instance.DisplayParamters(value);
     }
 
     public void GenerateEquation()
     {
         CalculationManager.Instance.SetOperator();
+        CalculationManager.Instance.GenerateNumbersList();
     }
   
 

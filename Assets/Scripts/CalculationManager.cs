@@ -11,16 +11,53 @@ public class CalculationManager : MonoSingleton<CalculationManager>
     private bool _isOnes, _isTens, _isHundreds, _isThousands;
     #endregion
 
+    #region ListsOfNumbers
+    [SerializeField]
+    private int[] _singleDigit = new int[9];
+    [SerializeField]
+    private int[] _doubleDigit = new int[90];
+    [SerializeField]
+    private int[] _tripleDigit = new int [900];
+    [SerializeField]
+    private int[] _quadDigit = new int [9000];
+
+    [SerializeField]
+    private List<int> _availableNumbers;
+    #endregion
+
     #region CalculationVariables
     [SerializeField]
     private List<string> _avaialableOperators;
-
-    [SerializeField]
-    private string chosenOperator;
-    [SerializeField]
-    private int randomOperator;
     #endregion
-    public void SetParamters(string value)
+
+    public override void Init()
+    {
+        int v = 1;
+        for(int i = 0 ; i < 9; i++)
+        {
+            _singleDigit[i] = v;
+            v++;
+        }
+
+        for(int i = 0 ; i < 90; i++)
+        {
+            _doubleDigit[i] = v;
+            v++;
+        }
+
+        for (int i = 0; i < 900; i++)
+        {
+            _tripleDigit[i] = v;
+            v++;
+        }
+
+        for(int i = 0; i < 9000; i++)
+        {
+            _quadDigit[i] = v;
+            v++;
+        }
+    }
+    public void SetParameters(string value)
     {
         switch (value)
         {
@@ -83,6 +120,7 @@ public class CalculationManager : MonoSingleton<CalculationManager>
                 }
                 else
                 {
+
                     _isOnes = true;
                 }
                 break;
@@ -122,10 +160,36 @@ public class CalculationManager : MonoSingleton<CalculationManager>
         }
     }
 
+    #region SetEquation
     public string SetOperator()
     {
+        string chosenOperator; 
+
         chosenOperator = _avaialableOperators[Random.Range(0, _avaialableOperators.Count)];
 
         return chosenOperator;
     }
+
+    public void GenerateNumbersList()
+    {
+        if(_isOnes == true)
+        {
+            _availableNumbers.AddRange(_singleDigit);
+        }
+        if(_isTens == true)
+        {
+            _availableNumbers.AddRange(_doubleDigit);
+        }
+        if(_isHundreds == true)
+        {
+            _availableNumbers.AddRange(_tripleDigit);
+        }
+        if(_isThousands == true)
+        {
+            _availableNumbers.AddRange(_quadDigit);
+        }
+    }
+
+    #endregion
+
 }
