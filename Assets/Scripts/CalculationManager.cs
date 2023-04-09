@@ -20,14 +20,18 @@ public class CalculationManager : MonoSingleton<CalculationManager>
     private int[] _tripleDigit = new int [900];
     [SerializeField]
     private int[] _quadDigit = new int [9000];
-
-    [SerializeField]
-    private List<int> _availableNumbers;
     #endregion
 
     #region CalculationVariables
     [SerializeField]
     private List<string> _avaialableOperators;
+    [SerializeField]
+    private List<int> _availableNumbers;
+
+    [SerializeField]
+    private int _num1, _num2;
+    [SerializeField]
+    private string _equation, _chosenOperator;
     #endregion
 
     public override void Init()
@@ -116,11 +120,15 @@ public class CalculationManager : MonoSingleton<CalculationManager>
             case "Ones":
                 if (_isOnes == true)
                 {
+                    foreach (int num in _singleDigit)
+                    {
+                        _availableNumbers.Remove(num);
+                    }
                     _isOnes = false;
                 }
                 else
                 {
-
+                    _availableNumbers.AddRange(_singleDigit);
                     _isOnes = true;
                 }
                 break;
@@ -128,10 +136,15 @@ public class CalculationManager : MonoSingleton<CalculationManager>
             case "Tens":
                 if (_isTens == true)
                 {
+                    foreach (int num in _doubleDigit)
+                    {
+                        _availableNumbers.Remove(num);
+                    }
                     _isTens = false;
                 }
                 else
                 {
+                    _availableNumbers.AddRange(_doubleDigit);
                     _isTens = true;
                 }
                 break;
@@ -139,10 +152,15 @@ public class CalculationManager : MonoSingleton<CalculationManager>
             case "Hundreds":
                 if (_isHundreds == true)
                 {
+                    foreach (int num in _tripleDigit)
+                    {
+                        _availableNumbers.Remove(num);
+                    }
                     _isHundreds = false;
                 }
                 else
                 {
+                    _availableNumbers.AddRange(_tripleDigit);
                     _isHundreds = true;
                 }
                 break;
@@ -150,10 +168,15 @@ public class CalculationManager : MonoSingleton<CalculationManager>
             case "Thousands":
                 if (_isThousands == true)
                 {
+                    foreach (int num in _quadDigit)
+                    {
+                        _availableNumbers.Remove(num);
+                    }
                     _isThousands = false;
                 }
                 else
                 {
+                    _availableNumbers.AddRange(_quadDigit);
                     _isThousands = true;
                 }
                 break;
@@ -161,35 +184,17 @@ public class CalculationManager : MonoSingleton<CalculationManager>
     }
 
     #region SetEquation
-    public string SetOperator()
+    public void SetEquation()
     {
-        string chosenOperator; 
+        _chosenOperator = _avaialableOperators[Random.Range(0, _avaialableOperators.Count)];
+        _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+        _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
 
-        chosenOperator = _avaialableOperators[Random.Range(0, _avaialableOperators.Count)];
+        _equation = _num1.ToString() + _chosenOperator + _num2.ToString();
 
-        return chosenOperator;
+        Debug.Log(_equation);
+
     }
-
-    public void GenerateNumbersList()
-    {
-        if(_isOnes == true)
-        {
-            _availableNumbers.AddRange(_singleDigit);
-        }
-        if(_isTens == true)
-        {
-            _availableNumbers.AddRange(_doubleDigit);
-        }
-        if(_isHundreds == true)
-        {
-            _availableNumbers.AddRange(_tripleDigit);
-        }
-        if(_isThousands == true)
-        {
-            _availableNumbers.AddRange(_quadDigit);
-        }
-    }
-
     #endregion
 
 }

@@ -15,8 +15,7 @@ public class ButtonManager : MonoSingleton<ButtonManager>
 
     public void GenerateEquation()
     {
-        CalculationManager.Instance.SetOperator();
-        CalculationManager.Instance.GenerateNumbersList();
+        CalculationManager.Instance.SetEquation();
     }
   
 
