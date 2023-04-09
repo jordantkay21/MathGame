@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DisplayManager : MonoSingleton<DisplayManager>
 {
@@ -10,6 +11,9 @@ public class DisplayManager : MonoSingleton<DisplayManager>
 
     [SerializeField]
     private GameObject _onesSelect, _tensSelect, _hundredsSelect, _thousandsSelect;
+
+    [SerializeField]
+    private TextMeshProUGUI _equationText;
 
     [SerializeField]
     private bool _isAdd, _isSubtract, _isMultiply, _isDivide;
@@ -127,8 +131,8 @@ public class DisplayManager : MonoSingleton<DisplayManager>
         }
     }
 
-    public void GenerateEquation()
+    public void DisplayEquation(string equation)
     {
-
+        _equationText.SetText(equation);
     }
 }

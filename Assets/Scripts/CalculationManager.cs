@@ -184,7 +184,7 @@ public class CalculationManager : MonoSingleton<CalculationManager>
     }
 
     #region SetEquation
-    public void SetEquation()
+    public string SetEquation()
     {
         _chosenOperator = _avaialableOperators[Random.Range(0, _avaialableOperators.Count)];
         _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
@@ -192,7 +192,7 @@ public class CalculationManager : MonoSingleton<CalculationManager>
 
         _equation = _num1.ToString() + _chosenOperator + _num2.ToString();
 
-        Debug.Log(_equation);
+        return _equation;
 
     }
     #endregion
