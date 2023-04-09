@@ -19,6 +19,13 @@ public class ButtonManager : MonoSingleton<ButtonManager>
         equation = CalculationManager.Instance.SetEquation();
         DisplayManager.Instance.DisplayEquation(equation);
     }
+
+    public void CheckAnswer()
+    {
+        string answerS = DisplayManager.Instance.UserInput();
+        int answer = int.Parse(answerS, System.Globalization.NumberStyles.Number);
+        CalculationManager.Instance.CheckAnswer(answer);
+    }
   
 
 

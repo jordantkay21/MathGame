@@ -29,7 +29,7 @@ public class CalculationManager : MonoSingleton<CalculationManager>
     private List<int> _availableNumbers;
 
     [SerializeField]
-    private int _num1, _num2;
+    private int _num1, _num2, _correctAnswer;
     [SerializeField]
     private string _equation, _chosenOperator;
     #endregion
@@ -182,19 +182,66 @@ public class CalculationManager : MonoSingleton<CalculationManager>
                 break;
         }
     }
-
-    #region SetEquation
     public string SetEquation()
     {
         _chosenOperator = _avaialableOperators[Random.Range(0, _avaialableOperators.Count)];
-        _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
-        _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+
+        switch (_chosenOperator)
+        {
+            case "+":
+                _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+
+                _correctAnswer = _num1 + _num2;
+                break;
+
+            case "-":
+                _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                while(_num1 < _num2)
+                {
+                    _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                }
+
+                _correctAnswer = _num1 - _num2;
+                break;
+
+            case "*":
+                _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+
+                _correctAnswer = _num1 * _num2;
+                break;
+
+            case "/":
+                _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                while(_num1%_num2 != 0)
+                {
+                    _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                }
+
+                _correctAnswer = _num1 / _num2;
+                break;
+        }
 
         _equation = _num1.ToString() + _chosenOperator + _num2.ToString();
 
         return _equation;
 
     }
-    #endregion
+
+    public void CheckAnswer(int userAnswer)
+    {
+        if(userAnswer == _correctAnswer)
+        {
+            Debug.Log("CORRECT!");
+        }
+        else
+        {
+            Debug.Log("INCORRECT");
+        }
+
+    }
 
 }
