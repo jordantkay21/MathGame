@@ -29,12 +29,13 @@ public class ButtonManager : MonoSingleton<ButtonManager>
 
     public void StartGame(bool onOff)
     {
-        DisplayManager.Instance.DisableEnableButtons(onOff);
+        DisplayManager.Instance.StartStopGame(onOff);
+        GenerateEquation();
     }
 
     public void StopGame(bool onOff)
     {
-        DisplayManager.Instance.DisableEnableButtons(onOff);
+        DisplayManager.Instance.StartStopGame(onOff);
 
     }
 

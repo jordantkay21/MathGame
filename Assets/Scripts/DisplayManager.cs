@@ -26,11 +26,16 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     private bool _isOnes, _isTens, _isHundreds, _isThousands;
     #endregion
 
-    #region
+    #region UserInput
     [SerializeField]
-    private TextMeshProUGUI _userAnswer;
+    private GameObject _userInputField;
+    [SerializeField]
+    private GameObject _userAnswer;
+    [SerializeField]
+    private GameObject _generateButton;
     #endregion
 
+    #region GameSetup
     public void DisplayParamters(string value)
     {
         switch (value)
@@ -145,13 +150,10 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     {
         _equationText.SetText(equation);
     }
+    #endregion
 
-    public string UserInput()
-    {
-        string answer = _userAnswer.text;
-        return answer;
-    }
-    public void DisableEnableButtons(bool onOff)
+    #region Start/StopGame
+    private void DisableEnableButtons(bool onOff)
     {
         if (onOff == true)
         {
@@ -178,4 +180,35 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             }
         }
     }
+
+    private void DisableEnableUserInputFields(bool onOff)
+    {
+        if(onOff == true)
+        {
+            _userInputField.SetActive(true);
+            _generateButton.SetActive(false);
+        }
+        else
+        {
+            _userInputField.SetActive(false);
+            _generateButton.SetActive(true);
+        }
+    }
+
+    public void StartStopGame(bool onOff)
+    {
+        DisableEnableUserInputFields(onOff);
+        DisableEnableButtons(onOff);
+    }
+    #endregion
+
+    #region GameMechanics
+    public string UserInput()
+    {
+        string answer = _userAnswer.GetComponent<TMP_InputField>().text;
+        return answer;
+    }
+
+
+    #endregion
 }
