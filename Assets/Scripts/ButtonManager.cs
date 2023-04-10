@@ -26,7 +26,18 @@ public class ButtonManager : MonoSingleton<ButtonManager>
         int answer = int.Parse(answerS, System.Globalization.NumberStyles.Number);
         CalculationManager.Instance.CheckAnswer(answer);
     }
-  
+
+    public void StartGame(bool onOff)
+    {
+        DisplayManager.Instance.DisableEnableButtons(onOff);
+    }
+
+    public void StopGame(bool onOff)
+    {
+        DisplayManager.Instance.DisableEnableButtons(onOff);
+
+    }
+
 
 
 }

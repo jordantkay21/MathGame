@@ -8,10 +8,14 @@ public class DisplayManager : MonoSingleton<DisplayManager>
 {
     #region GameSetupVariables
     [SerializeField]
-    private GameObject _addSelect, _subtractSelect, _multiplySelect, _divideSelect;
+    private GameObject[] _operatorButtons = new GameObject[4]; // 0=+ | 1=- | 2=* | 3=/
+    [SerializeField]
+    private GameObject[] _operatorChosen = new GameObject[4]; // 0=+ | 1=- | 2=* | 3=/
 
     [SerializeField]
-    private GameObject _onesSelect, _tensSelect, _hundredsSelect, _thousandsSelect;
+    private GameObject[] _placeValueButtons = new GameObject[4]; // 0=Ones | 1=Tens | 2=Hundreds | 3=Thousands 
+    [SerializeField]
+    private GameObject[] _placeValueChosen = new GameObject[4];  // 0=Ones | 1=Tens | 2=Hundreds | 3=Thousands 
 
     [SerializeField]
     private TextMeshProUGUI _equationText;
@@ -34,12 +38,12 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             case "Add":
                 if (_isAdd == true)
                 {
-                    _addSelect.SetActive(false);
+                    _operatorChosen[0].SetActive(false);
                     _isAdd = false;
                 }
                 else
                 {
-                    _addSelect.SetActive(true);
+                    _operatorChosen[0].SetActive(true);
                     _isAdd = true;
                 }
                 break;
@@ -47,12 +51,12 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             case "Subtract":
                 if (_isSubtract == true)
                 {
-                    _subtractSelect.SetActive(false);
+                    _operatorChosen[1].SetActive(false);
                     _isSubtract = false;
                 }
                 else
                 {
-                    _subtractSelect.SetActive(true);
+                    _operatorChosen[1].SetActive(true);
                     _isSubtract = true;
                 }
                 break;
@@ -60,12 +64,12 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             case "Multiply":
                 if (_isMultiply == true)
                 {
-                    _multiplySelect.SetActive(false);
+                    _operatorChosen[2].SetActive(false);
                     _isMultiply = false;
                 }
                 else
                 {
-                    _multiplySelect.SetActive(true);
+                    _operatorChosen[2].SetActive(true);
                     _isMultiply = true;
                 }
                 break;
@@ -73,12 +77,12 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             case "Divide":
                 if (_isDivide == true)
                 {
-                    _divideSelect.SetActive(false);
+                    _operatorChosen[3].SetActive(false);
                     _isDivide = false;
                 }
                 else
                 {
-                    _divideSelect.SetActive(true);
+                    _operatorChosen[3].SetActive(true);
                     _isDivide = true;
                 }
                 break;
@@ -86,12 +90,12 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             case "Ones":
                 if (_isOnes == true)
                 {
-                    _onesSelect.SetActive(false);
+                    _placeValueChosen[0].SetActive(false);
                     _isOnes = false;
                 }
                 else
                 {
-                    _onesSelect.SetActive(true);
+                    _placeValueChosen[0].SetActive(true);
                     _isOnes = true;
                 }
                 break;
@@ -99,12 +103,12 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             case "Tens":
                 if (_isTens == true)
                 {
-                    _tensSelect.SetActive(false);
+                    _placeValueChosen[1].SetActive(false);
                     _isTens = false;
                 }
                 else
                 {
-                    _tensSelect.SetActive(true);
+                    _placeValueChosen[1].SetActive(true);
                     _isTens = true;
                 }
                 break;
@@ -112,12 +116,12 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             case "Hundreds":
                 if (_isHundreds == true)
                 {
-                    _hundredsSelect.SetActive(false);
+                    _placeValueChosen[2].SetActive(false);
                     _isHundreds = false;
                 }
                 else
                 {
-                    _hundredsSelect.SetActive(true);
+                    _placeValueChosen[2].SetActive(true);
                     _isHundreds = true;
                 }
                 break;
@@ -125,12 +129,12 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             case "Thousands":
                 if (_isThousands == true)
                 {
-                    _thousandsSelect.SetActive(false);
+                    _placeValueChosen[3].SetActive(false);
                     _isThousands = false;
                 }
                 else
                 {
-                    _thousandsSelect.SetActive(true);
+                    _placeValueChosen[3].SetActive(true);
                     _isThousands = true;
                 }
                 break;
@@ -146,5 +150,32 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     {
         string answer = _userAnswer.text;
         return answer;
+    }
+    public void DisableEnableButtons(bool onOff)
+    {
+        if (onOff == true)
+        {
+            foreach (GameObject button in _placeValueButtons)
+            {
+                button.GetComponent<Button>().interactable = false;
+            }
+
+            foreach (GameObject button in _operatorButtons)
+            {
+                button.GetComponent<Button>().interactable = false;
+            }
+        }
+        else
+        {
+            foreach (GameObject button in _placeValueButtons)
+            {
+                button.GetComponent<Button>().interactable = true;
+            }
+
+            foreach (GameObject button in _operatorButtons)
+            {
+                button.GetComponent<Button>().interactable = true;
+            }
+        }
     }
 }
