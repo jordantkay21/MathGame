@@ -238,6 +238,7 @@ public class CalculationManager : MonoSingleton<CalculationManager>
         if(userAnswer == _correctAnswer)
         {
             DisplayManager.Instance.DisplayCorrect();
+            ScoreManager.Instance.AddToScore(1);
         }
         else
         {

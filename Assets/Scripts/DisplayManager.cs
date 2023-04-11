@@ -18,7 +18,7 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     private GameObject[] _placeValueChosen = new GameObject[4];  // 0=Ones | 1=Tens | 2=Hundreds | 3=Thousands 
 
     [SerializeField]
-    private TextMeshProUGUI _equationText, _gameMessageText;
+    private TextMeshProUGUI _equationText, _gameMessageText, _scoreText;
 
     [SerializeField]
     private bool _isAdd, _isSubtract, _isMultiply, _isDivide;
@@ -260,6 +260,11 @@ public class DisplayManager : MonoSingleton<DisplayManager>
 
         _equationTextObj.SetActive(true);
         _incorrectTextObj.SetActive(false);
+    }
+
+    public void DisplayScore(int score)
+    {
+        _scoreText.SetText("Score: " + score.ToString());
     }
 
 
