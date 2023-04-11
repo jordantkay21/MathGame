@@ -25,6 +25,7 @@ public class ButtonManager : MonoSingleton<ButtonManager>
         string answerS = DisplayManager.Instance.UserInput();
         int answer = int.Parse(answerS, System.Globalization.NumberStyles.Number);
         CalculationManager.Instance.CheckAnswer(answer);
+        DisplayManager.Instance.ClearInputField();
     }
 
     public void StartGame(bool onOff)

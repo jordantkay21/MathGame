@@ -24,15 +24,16 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     private bool _isAdd, _isSubtract, _isMultiply, _isDivide;
     [SerializeField]
     private bool _isOnes, _isTens, _isHundreds, _isThousands;
+    [SerializeField]
+    private GameObject _gameMessage;
     #endregion
 
     #region UserInput
     [SerializeField]
-    private GameObject _userInputField;
+    private GameObject _userInputField, _userAnswer, _generateButton;
+
     [SerializeField]
-    private GameObject _userAnswer;
-    [SerializeField]
-    private GameObject _generateButton;
+    private GameObject _equationTextObj, _correctTextObj, _incorrectTextObj;
     #endregion
 
     #region GameSetup
@@ -187,11 +188,14 @@ public class DisplayManager : MonoSingleton<DisplayManager>
         {
             _userInputField.SetActive(true);
             _generateButton.SetActive(false);
+            _gameMessage.SetActive(false);
+            
         }
         else
         {
             _userInputField.SetActive(false);
             _generateButton.SetActive(true);
+            _gameMessage.SetActive(true);
         }
     }
 
@@ -207,6 +211,45 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     {
         string answer = _userAnswer.GetComponent<TMP_InputField>().text;
         return answer;
+
+    }
+
+    public void ClearInputField()
+    {
+        _userAnswer.GetComponent<TMP_InputField>().text = "";
+    }
+
+    public void DisplayCorrect()
+    {
+        StartCoroutine(CorrectRoutine());
+        ButtonManager.Instance.GenerateEquation();
+    }
+
+    public void DisplayIncorrect()
+    {
+        StartCoroutine(IncorrectRoutine());
+    }
+
+    private IEnumerator CorrectRoutine()
+    {
+        _equationTextObj.SetActive(false);
+        _correctTextObj.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        _equationTextObj.SetActive(true);
+        _correctTextObj.SetActive(false);
+    }
+
+    private IEnumerator IncorrectRoutine()
+    {
+        _equationTextObj.SetActive(false);
+        _incorrectTextObj.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        _equationTextObj.SetActive(true);
+        _incorrectTextObj.SetActive(false);
     }
 
 

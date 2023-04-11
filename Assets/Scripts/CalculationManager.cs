@@ -235,11 +235,11 @@ public class CalculationManager : MonoSingleton<CalculationManager>
     {
         if(userAnswer == _correctAnswer)
         {
-            Debug.Log("CORRECT!");
+            DisplayManager.Instance.DisplayCorrect();
         }
         else
         {
-            Debug.Log("INCORRECT");
+            DisplayManager.Instance.DisplayIncorrect();
         }
 
     }
