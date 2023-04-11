@@ -10,14 +10,36 @@ public class ButtonManager : MonoSingleton<ButtonManager>
     public void SetTrueFalse(string value)
     {
         CalculationManager.Instance.SetParameters(value);
-        DisplayManager.Instance.DisplayParamters(value);
+        DisplayManager.Instance.DisplayParameterSelections(value);
     }
 
     public void GenerateEquation()
     {
         string equation;
-        equation = CalculationManager.Instance.SetEquation();
-        DisplayManager.Instance.DisplayEquation(equation);
+        int operatorsList = CalculationManager.Instance.avaialableOperators.Count;
+        int numbersList = CalculationManager.Instance.availableNumbers.Count;
+
+        if (operatorsList == 0 && numbersList == 0)
+        {
+            DisplayManager.Instance.DisplayNoParametersWarning();
+        }
+        else if (operatorsList == 0)
+        {
+            DisplayManager.Instance.DisplayNoOperatorWarning();
+        }
+        else if (numbersList == 0)
+        {
+            DisplayManager.Instance.DisplayNoPlaceValueWarning();
+        }
+        else
+        {
+            DisplayManager.Instance.DisplayGameMessage("SELECT YOUR OPERATORS AND PLACE VALUES")
+            equation = CalculationManager.Instance.SetEquation();
+            DisplayManager.Instance.DisplayEquation(equation);
+        }
+
+
+
     }
 
     public void CheckAnswer()

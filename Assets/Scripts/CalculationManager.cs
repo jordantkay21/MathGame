@@ -24,9 +24,9 @@ public class CalculationManager : MonoSingleton<CalculationManager>
 
     #region CalculationVariables
     [SerializeField]
-    private List<string> _avaialableOperators;
+    public List<string> avaialableOperators;
     [SerializeField]
-    private List<int> _availableNumbers;
+    public List<int> availableNumbers;
 
     [SerializeField]
     private int _num1, _num2, _correctAnswer;
@@ -68,12 +68,12 @@ public class CalculationManager : MonoSingleton<CalculationManager>
             case "Add":
                 if(_isAdd == true)
                 {
-                    _avaialableOperators.Remove("+");
+                    avaialableOperators.Remove("+");
                     _isAdd = false;
                 }
                 else
                 {
-                    _avaialableOperators.Add("+");
+                    avaialableOperators.Add("+");
                     _isAdd = true;
                 }
                 break;
@@ -81,12 +81,12 @@ public class CalculationManager : MonoSingleton<CalculationManager>
             case "Subtract":
                 if (_isSubtract == true)
                 {
-                    _avaialableOperators.Remove("-");
+                    avaialableOperators.Remove("-");
                     _isSubtract = false;
                 }
                 else
                 {
-                    _avaialableOperators.Add("-");
+                    avaialableOperators.Add("-");
                     _isSubtract = true;
                 }
                 break;
@@ -94,12 +94,12 @@ public class CalculationManager : MonoSingleton<CalculationManager>
             case "Multiply":
                 if (_isMultiply == true)
                 {
-                    _avaialableOperators.Remove("*");
+                    avaialableOperators.Remove("*");
                     _isMultiply = false;
                 }
                 else
                 {
-                    _avaialableOperators.Add("*");
+                    avaialableOperators.Add("*");
                     _isMultiply = true;
                 }
                 break;
@@ -107,12 +107,12 @@ public class CalculationManager : MonoSingleton<CalculationManager>
             case "Divide":
                 if (_isDivide == true)
                 {
-                    _avaialableOperators.Remove("/");
+                    avaialableOperators.Remove("/");
                     _isDivide = false;
                 }
                 else
                 {
-                    _avaialableOperators.Add("/");
+                    avaialableOperators.Add("/");
                     _isDivide = true;
                 }
                 break;
@@ -122,13 +122,13 @@ public class CalculationManager : MonoSingleton<CalculationManager>
                 {
                     foreach (int num in _singleDigit)
                     {
-                        _availableNumbers.Remove(num);
+                        availableNumbers.Remove(num);
                     }
                     _isOnes = false;
                 }
                 else
                 {
-                    _availableNumbers.AddRange(_singleDigit);
+                    availableNumbers.AddRange(_singleDigit);
                     _isOnes = true;
                 }
                 break;
@@ -138,13 +138,13 @@ public class CalculationManager : MonoSingleton<CalculationManager>
                 {
                     foreach (int num in _doubleDigit)
                     {
-                        _availableNumbers.Remove(num);
+                        availableNumbers.Remove(num);
                     }
                     _isTens = false;
                 }
                 else
                 {
-                    _availableNumbers.AddRange(_doubleDigit);
+                    availableNumbers.AddRange(_doubleDigit);
                     _isTens = true;
                 }
                 break;
@@ -154,13 +154,13 @@ public class CalculationManager : MonoSingleton<CalculationManager>
                 {
                     foreach (int num in _tripleDigit)
                     {
-                        _availableNumbers.Remove(num);
+                        availableNumbers.Remove(num);
                     }
                     _isHundreds = false;
                 }
                 else
                 {
-                    _availableNumbers.AddRange(_tripleDigit);
+                    availableNumbers.AddRange(_tripleDigit);
                     _isHundreds = true;
                 }
                 break;
@@ -170,13 +170,13 @@ public class CalculationManager : MonoSingleton<CalculationManager>
                 {
                     foreach (int num in _quadDigit)
                     {
-                        _availableNumbers.Remove(num);
+                        availableNumbers.Remove(num);
                     }
                     _isThousands = false;
                 }
                 else
                 {
-                    _availableNumbers.AddRange(_quadDigit);
+                    availableNumbers.AddRange(_quadDigit);
                     _isThousands = true;
                 }
                 break;
@@ -184,41 +184,42 @@ public class CalculationManager : MonoSingleton<CalculationManager>
     }
     public string SetEquation()
     {
-        _chosenOperator = _avaialableOperators[Random.Range(0, _avaialableOperators.Count)];
+        _chosenOperator = avaialableOperators[Random.Range(0, avaialableOperators.Count)];
+
 
         switch (_chosenOperator)
         {
             case "+":
-                _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
-                _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                _num1 = availableNumbers[Random.Range(0, availableNumbers.Count)];
+                _num2 = availableNumbers[Random.Range(0, availableNumbers.Count)];
 
                 _correctAnswer = _num1 + _num2;
                 break;
 
             case "-":
-                _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
-                _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
-                while(_num1 < _num2)
+                _num1 = availableNumbers[Random.Range(0, availableNumbers.Count)];
+                _num2 = availableNumbers[Random.Range(0, availableNumbers.Count)];
+                while (_num1 < _num2)
                 {
-                    _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                    _num2 = availableNumbers[Random.Range(0, availableNumbers.Count)];
                 }
 
                 _correctAnswer = _num1 - _num2;
                 break;
 
             case "*":
-                _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
-                _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                _num1 = availableNumbers[Random.Range(0, availableNumbers.Count)];
+                _num2 = availableNumbers[Random.Range(0, availableNumbers.Count)];
 
                 _correctAnswer = _num1 * _num2;
                 break;
 
             case "/":
-                _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
-                _num2 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
-                while(_num1%_num2 != 0)
+                _num1 = availableNumbers[Random.Range(0, availableNumbers.Count)];
+                _num2 = availableNumbers[Random.Range(0, availableNumbers.Count)];
+                while (_num1 % _num2 != 0)
                 {
-                    _num1 = _availableNumbers[Random.Range(0, _availableNumbers.Count)];
+                    _num1 = availableNumbers[Random.Range(0, availableNumbers.Count)];
                 }
 
                 _correctAnswer = _num1 / _num2;
@@ -229,6 +230,26 @@ public class CalculationManager : MonoSingleton<CalculationManager>
 
         return _equation;
 
+    }
+
+    public void CheckSelections()
+    {
+        if(avaialableOperators.Count == 0 && availableNumbers.Count == 0)
+        {
+            DisplayManager.Instance.DisplayNoParametersWarning();
+        }
+        else if(avaialableOperators.Count == 0)
+        {
+            DisplayManager.Instance.DisplayNoOperatorWarning();
+        }
+        else if(availableNumbers.Count == 0)
+        {
+            DisplayManager.Instance.DisplayNoPlaceValueWarning();
+        }
+        else
+        {
+            ButtonManager.Instance.GenerateEquation();
+        }
     }
 
     public void CheckAnswer(int userAnswer)

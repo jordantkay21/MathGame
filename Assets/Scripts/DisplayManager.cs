@@ -18,14 +18,14 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     private GameObject[] _placeValueChosen = new GameObject[4];  // 0=Ones | 1=Tens | 2=Hundreds | 3=Thousands 
 
     [SerializeField]
-    private TextMeshProUGUI _equationText;
+    private TextMeshProUGUI _equationText, _gameMessageText;
 
     [SerializeField]
     private bool _isAdd, _isSubtract, _isMultiply, _isDivide;
     [SerializeField]
     private bool _isOnes, _isTens, _isHundreds, _isThousands;
     [SerializeField]
-    private GameObject _gameMessage;
+    private GameObject _gameMessageObj;
     #endregion
 
     #region UserInput
@@ -37,7 +37,7 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     #endregion
 
     #region GameSetup
-    public void DisplayParamters(string value)
+    public void DisplayParameterSelections(string value)
     {
         switch (value)
         {
@@ -151,6 +151,26 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     {
         _equationText.SetText(equation);
     }
+
+    public void DisplayNoOperatorWarning()
+    {
+        _gameMessageText.SetText("MUST SELECT AT LEAST ONE OPERATOR TO START!");
+    }
+
+    public void DisplayNoPlaceValueWarning()
+    {
+        _gameMessageText.SetText("MUST SELECT AT LEAST ONE PLACE VALUE TO START");
+    }
+
+    public void DisplayNoParametersWarning()
+    {
+        _gameMessageText.SetText("MUST SELECT AT LEAST ONE PLACE VALUE AND ONE OPERATOR TO START!");
+    }
+
+    public void DisplayGameMessage(string message)
+    {
+        _gameMessageText.SetText(message);
+    }
     #endregion
 
     #region Start/StopGame
@@ -188,14 +208,14 @@ public class DisplayManager : MonoSingleton<DisplayManager>
         {
             _userInputField.SetActive(true);
             _generateButton.SetActive(false);
-            _gameMessage.SetActive(false);
+            _gameMessageObj.SetActive(false);
             
         }
         else
         {
             _userInputField.SetActive(false);
             _generateButton.SetActive(true);
-            _gameMessage.SetActive(true);
+            _gameMessageObj.SetActive(true);
         }
     }
 
