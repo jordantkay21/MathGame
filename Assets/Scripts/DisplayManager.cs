@@ -25,15 +25,15 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     [SerializeField]
     private bool _isOnes, _isTens, _isHundreds, _isThousands;
     [SerializeField]
-    private GameObject _gameMessageObj;
+    private GameObject _gameMessageObj, _startButton;
     #endregion
 
     #region UserInput
     [SerializeField]
-    private GameObject _userInputField, _userAnswer, _generateButton;
+    private GameObject _userInputField, _generateButton;
 
     [SerializeField]
-    private GameObject _equationTextObj, _correctTextObj, _incorrectTextObj;
+    private GameObject _equationTextObj;
     #endregion
 
     #region GameSetup
@@ -166,7 +166,7 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     #region Start/StopGame
     private void DisableEnableButtons(bool onOff)
     {
-        if (onOff == true)
+        if (onOff == true) //Start
         {
             foreach (GameObject button in _placeValueButtons)
             {
@@ -177,8 +177,10 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             {
                 button.GetComponent<Button>().interactable = false;
             }
+
+            _startButton.GetComponent<Button>().interactable = false;
         }
-        else
+        else //Stop
         {
             foreach (GameObject button in _placeValueButtons)
             {
@@ -189,23 +191,24 @@ public class DisplayManager : MonoSingleton<DisplayManager>
             {
                 button.GetComponent<Button>().interactable = true;
             }
+
+            _startButton.GetComponent<Button>().interactable = false;
         }
     }
 
     private void DisableEnableUserInputFields(bool onOff)
     {
-        if(onOff == true)
+        if(onOff == true) //Start
         {
             _userInputField.SetActive(true);
             _generateButton.SetActive(false);
-            _gameMessageObj.SetActive(false);
-            
+            _gameMessageText.SetText("");
         }
-        else
+        else //Stop
         {
             _userInputField.SetActive(false);
             _generateButton.SetActive(true);
-            _gameMessageObj.SetActive(true);
+            _gameMessageText.SetText("SELECT YOUR OPERATORS AND PLACE VALUES");
         }
     }
 
@@ -219,14 +222,14 @@ public class DisplayManager : MonoSingleton<DisplayManager>
     #region GameMechanics
     public string UserInput()
     {
-        string answer = _userAnswer.GetComponent<TMP_InputField>().text;
+        string answer = _userInputField.GetComponent<TMP_InputField>().text;
         return answer;
 
     }
 
     public void ClearInputField()
     {
-        _userAnswer.GetComponent<TMP_InputField>().text = "";
+        _userInputField.GetComponent<TMP_InputField>().text = "";
     }
 
     public void DisplayCorrect()
@@ -242,24 +245,20 @@ public class DisplayManager : MonoSingleton<DisplayManager>
 
     private IEnumerator CorrectRoutine()
     {
-        _equationTextObj.SetActive(false);
-        _correctTextObj.SetActive(true);
+        _gameMessageText.SetText("CORRECT!");
 
         yield return new WaitForSeconds(1);
 
-        _equationTextObj.SetActive(true);
-        _correctTextObj.SetActive(false);
+        _gameMessageText.SetText("");
     }
 
     private IEnumerator IncorrectRoutine()
     {
-        _equationTextObj.SetActive(false);
-        _incorrectTextObj.SetActive(true);
+        _gameMessageText.SetText("INCORRECT");
 
         yield return new WaitForSeconds(1);
 
-        _equationTextObj.SetActive(true);
-        _incorrectTextObj.SetActive(false);
+        _gameMessageText.SetText("");
     }
 
     public void DisplayScore(int score)

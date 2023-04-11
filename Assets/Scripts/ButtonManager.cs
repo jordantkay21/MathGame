@@ -7,8 +7,13 @@ public class ButtonManager : MonoSingleton<ButtonManager>
     [SerializeField]
     private string selectedNumber;
 
-
-    public void SetTrueFalse(string value)
+    /// <summary>
+    /// Set the value each button holds
+    /// Add | Subtract | Multiply | Divide
+    /// Ones | Tens | Hundreds | Thousands
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetButtonValue(string value)
     {
         CalculationManager.Instance.SetParameters(value);
         DisplayManager.Instance.DisplayParameterSelections(value);
@@ -26,7 +31,6 @@ public class ButtonManager : MonoSingleton<ButtonManager>
         }
         else
         {
-            DisplayManager.Instance.DisplayGameMessage("SELECT YOUR OPERATORS AND PLACE VALUES");
             equation = CalculationManager.Instance.SetEquation();
             DisplayManager.Instance.DisplayEquation(equation);
         }
@@ -36,9 +40,17 @@ public class ButtonManager : MonoSingleton<ButtonManager>
     public void CheckAnswer()
     {
         string answerS = DisplayManager.Instance.UserInput();
-        int answer = int.Parse(answerS, System.Globalization.NumberStyles.Number);
-        CalculationManager.Instance.CheckAnswer(answer);
-        DisplayManager.Instance.ClearInputField();
+        if (answerS != "")
+        {
+            int answer = int.Parse(answerS, System.Globalization.NumberStyles.Number);
+            CalculationManager.Instance.CheckAnswer(answer);
+            DisplayManager.Instance.ClearInputField();
+        }
+        else
+        {
+            return;
+        }
+
     }
 
     public void StartGame(bool onOff)
