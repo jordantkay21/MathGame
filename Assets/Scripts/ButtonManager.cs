@@ -7,6 +7,7 @@ public class ButtonManager : MonoSingleton<ButtonManager>
     [SerializeField]
     private string selectedNumber;
 
+
     public void SetTrueFalse(string value)
     {
         CalculationManager.Instance.SetParameters(value);
@@ -15,30 +16,20 @@ public class ButtonManager : MonoSingleton<ButtonManager>
 
     public void GenerateEquation()
     {
-        string equation;
         int operatorsList = CalculationManager.Instance.avaialableOperators.Count;
         int numbersList = CalculationManager.Instance.availableNumbers.Count;
+        string equation;
 
-        if (operatorsList == 0 && numbersList == 0)
+        if (operatorsList == 0 || numbersList == 0)
         {
             DisplayManager.Instance.DisplayNoParametersWarning();
         }
-        else if (operatorsList == 0)
-        {
-            DisplayManager.Instance.DisplayNoOperatorWarning();
-        }
-        else if (numbersList == 0)
-        {
-            DisplayManager.Instance.DisplayNoPlaceValueWarning();
-        }
         else
         {
-            DisplayManager.Instance.DisplayGameMessage("SELECT YOUR OPERATORS AND PLACE VALUES")
+            DisplayManager.Instance.DisplayGameMessage("SELECT YOUR OPERATORS AND PLACE VALUES");
             equation = CalculationManager.Instance.SetEquation();
             DisplayManager.Instance.DisplayEquation(equation);
         }
-
-
 
     }
 
@@ -52,8 +43,14 @@ public class ButtonManager : MonoSingleton<ButtonManager>
 
     public void StartGame(bool onOff)
     {
-        DisplayManager.Instance.StartStopGame(onOff);
+        int operatorsList = CalculationManager.Instance.avaialableOperators.Count;
+        int numbersList = CalculationManager.Instance.availableNumbers.Count;
         GenerateEquation();
+
+        if (operatorsList != 0 && numbersList != 0)
+        {
+            DisplayManager.Instance.StartStopGame(onOff);
+        }
     }
 
     public void StopGame(bool onOff)

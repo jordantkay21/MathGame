@@ -232,25 +232,6 @@ public class CalculationManager : MonoSingleton<CalculationManager>
 
     }
 
-    public void CheckSelections()
-    {
-        if(avaialableOperators.Count == 0 && availableNumbers.Count == 0)
-        {
-            DisplayManager.Instance.DisplayNoParametersWarning();
-        }
-        else if(avaialableOperators.Count == 0)
-        {
-            DisplayManager.Instance.DisplayNoOperatorWarning();
-        }
-        else if(availableNumbers.Count == 0)
-        {
-            DisplayManager.Instance.DisplayNoPlaceValueWarning();
-        }
-        else
-        {
-            ButtonManager.Instance.GenerateEquation();
-        }
-    }
 
     public void CheckAnswer(int userAnswer)
     {

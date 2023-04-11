@@ -152,16 +152,6 @@ public class DisplayManager : MonoSingleton<DisplayManager>
         _equationText.SetText(equation);
     }
 
-    public void DisplayNoOperatorWarning()
-    {
-        _gameMessageText.SetText("MUST SELECT AT LEAST ONE OPERATOR TO START!");
-    }
-
-    public void DisplayNoPlaceValueWarning()
-    {
-        _gameMessageText.SetText("MUST SELECT AT LEAST ONE PLACE VALUE TO START");
-    }
-
     public void DisplayNoParametersWarning()
     {
         _gameMessageText.SetText("MUST SELECT AT LEAST ONE PLACE VALUE AND ONE OPERATOR TO START!");
